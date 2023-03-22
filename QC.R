@@ -8,10 +8,12 @@ library(readxl)
 # 2.The column names of data are the samples.
 # 3.The row names of data are the symbols, sampleid and group.
 # data iris
+data("iris")
 data <- iris
 data$sampleid <- rownames(data)
 data$group <- data$Species
-data <- subset(data,select = -c(Species))
+data <- data %>% 
+  select(-c("Species"))
 head(data)
 # the data needs to be transformed into the following styles.
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width  group sampleid
@@ -35,15 +37,16 @@ value_colour <- c("setosa" = "#00A087FF",# control group
 # 1. no abnormal sample data
 # 2. no non-biological differences
 ## 2.1 boxplot ------------------------------------------------------------
-data <- data
-
 library(ggplot2)
 library(tidyr)
 data_ggplot <- tidyr::gather(data,key = "key",
                              value = "value",
                              -c("sampleid","group")
-)
-
+                             )
+data_ggplot$group <- factor(data_ggplot$group)
+data_ggplot <- data_ggplot[order(data_ggplot$group),]
+data_ggplot$sampleid <- factor(data_ggplot$sampleid,levels = unique(data_ggplot$sampleid))
+data_ggplot <- data_ggplot[order(data_ggplot$sampleid),]
 # Plot the boxplot with ggplot2.
 ggplot(data_ggplot,aes(x = sampleid,
                        y = log2(value + 1),

@@ -14,8 +14,7 @@ data("iris")
 data <- iris %>%
   rename(group = "Species") %>%
   mutate(sampleid = rownames(iris))
-data_group <- data %>%
-  select(group)
+
 head(data)
 # 1.2 color setting -------------------------------------------------------
 # The names(value_colour) need to be the same as table(data$group)
@@ -35,7 +34,7 @@ library(tidyr)
 data_ggplot <- tidyr::gather(data,key = "key",
                              value = "value",
                              -c("sampleid","group")
-                             )
+)
 # arrange
 data_ggplot <- data_ggplot %>%
   mutate(group = factor(.$group)) %>%
@@ -47,7 +46,7 @@ data_ggplot <- data_ggplot %>%
 ggplot(data_ggplot,aes(x = sampleid,
                        y = log2(value + 1),
                        fill = group)
-       ) +
+) +
   geom_boxplot() +
   scale_fill_manual(values = value_colour) +
   theme_classic() +
@@ -151,7 +150,3 @@ fviz_pca_ind(dat.pca,
              legend.title = "Groups"
 )
 dev.off()
-
-
-
-

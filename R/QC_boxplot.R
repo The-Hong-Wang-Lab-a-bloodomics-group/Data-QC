@@ -1,13 +1,18 @@
-QC_boxplot <- function(data,group,colour,filename = NA){
+QC_boxplot <- function(data,data_group,value_colour){
   library(ggplot2)
   library(tidyr)
   source("./R/data_preparation.R")
-  data_pre <- data_preparation(data,group)
+  data_pre <- data_preparation(data,data_group)
   data_ggplot <- tidyr::gather(data_pre,key = "key",
                                value = "value",
                                -c("sampleid","group")
                                )
-  value_colour <- colour
+  if (length(value_colour) != length(table(data_ggplot$group))){
+    warning("the length of value_colour is not equal to the length of data_group")
+  }
+  if (length(value_colour) < length(table(data_ggplot$group))){
+    stop("the length of value_colour is less than the length of data_group")
+  }
   data_ggplot <- data_ggplot[order(data_ggplot$group),]
   data_ggplot$sampleid <- factor(data_ggplot$sampleid,levels = unique(data_ggplot$sampleid))
   data_ggplot <- data_ggplot[order(data_ggplot$sampleid),]
@@ -30,15 +35,4 @@ QC_boxplot <- function(data,group,colour,filename = NA){
                                      size = 10)
           ) +
     labs(x = "")
-  # create the figure with pdf and png
-  if (!is.na(filename)) {
-    ggsave(filename = paste0(filename,".pdf"),
-           height = 5,
-           width = 5,
-           plot = last_plot())
-    ggsave(filename = paste0(filename,".png"),
-           height = 5,
-           width = 5,
-           plot = last_plot())
-    }
 }

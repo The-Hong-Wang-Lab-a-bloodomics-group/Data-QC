@@ -14,7 +14,8 @@ data("iris")
 data <- iris %>%
   rename(group = "Species") %>%
   mutate(sampleid = rownames(iris))
-
+data_group <- data %>%
+  select(group)
 head(data)
 # 1.2 color setting -------------------------------------------------------
 # The names(value_colour) need to be the same as table(data$group)

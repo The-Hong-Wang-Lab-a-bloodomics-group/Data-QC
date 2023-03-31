@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param data
+#' @param data_group
+#' @param value_colour
+#'
+#' @return
+#' @export
+#'
+#' @examples
 QC_heatmap <- function(data,data_group,value_colour){
   library(tidyr)
   source("./R/data_preparation.R")

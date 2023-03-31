@@ -1,3 +1,12 @@
+#' merge data and group
+#'
+#' @param data data frame
+#' @param data_group group
+#'
+#' @return
+#' @export
+#'
+#' @examples
 data_preparation <- function(data,data_group){
   library(tidyr)
   library(dplyr)

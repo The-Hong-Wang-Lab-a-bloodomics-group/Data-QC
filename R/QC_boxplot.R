@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param data
+#' @param data_group
+#' @param value_colour
+#'
+#' @return
+#' @export
+#'
+#' @examples
 QC_boxplot <- function(data,data_group,value_colour){
   library(ggplot2)
   library(tidyr)

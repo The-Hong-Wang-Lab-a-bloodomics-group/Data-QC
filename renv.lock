@@ -9,6 +9,7 @@
     ]
   },
   "Packages": {
+<<<<<<< HEAD
     "DBI": {
       "Package": "DBI",
       "Version": "1.1.3",
@@ -20,6 +21,8 @@
       ],
       "Hash": "b2866e62bab9378c3cc9476a1954226b"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "DT": {
       "Package": "DT",
       "Version": "0.27",
@@ -232,6 +235,7 @@
       ],
       "Hash": "9fe98599ca456d6552421db0d6772d8f"
     },
+<<<<<<< HEAD
     "blob": {
       "Package": "blob",
       "Version": "1.2.4",
@@ -244,6 +248,8 @@
       ],
       "Hash": "40415719b5a479b87949f3aa0aee737c"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "boot": {
       "Package": "boot",
       "Version": "1.3-28.1",
@@ -256,6 +262,7 @@
       ],
       "Hash": "9a052fbcbe97a98ceb18dbfd30ebd96e"
     },
+<<<<<<< HEAD
     "brew": {
       "Package": "brew",
       "Version": "1.0-8",
@@ -263,6 +270,8 @@
       "Repository": "CRAN",
       "Hash": "d69a786e85775b126bddbee185ae6084"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "brio": {
       "Package": "brio",
       "Version": "1.1.3",
@@ -430,6 +439,7 @@
       ],
       "Hash": "f20c47fd52fae58b4e377c37bb8c335b"
     },
+<<<<<<< HEAD
     "commonmark": {
       "Package": "commonmark",
       "Version": "1.9.0",
@@ -450,6 +460,8 @@
       ],
       "Hash": "bb097fccb22d156624fd07cd2894ddb6"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "corrplot": {
       "Package": "corrplot",
       "Version": "0.92",
@@ -493,6 +505,7 @@
       ],
       "Hash": "e8a1e41acf02548751f45c718d55aa6a"
     },
+<<<<<<< HEAD
     "credentials": {
       "Package": "credentials",
       "Version": "1.3.2",
@@ -507,6 +520,8 @@
       ],
       "Hash": "93762d0a34d78e6a025efdbfb5c6bb41"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "crosstalk": {
       "Package": "crosstalk",
       "Version": "1.2.0",
@@ -530,6 +545,7 @@
       ],
       "Hash": "e4f97056611e8e6b8b852d13b7400cf1"
     },
+<<<<<<< HEAD
     "data.table": {
       "Package": "data.table",
       "Version": "1.14.8",
@@ -569,6 +585,8 @@
       ],
       "Hash": "d24305b92db333726aed162a2c23a147"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "dendextend": {
       "Package": "dendextend",
       "Version": "1.17.1",
@@ -599,6 +617,7 @@
       ],
       "Hash": "6b9602c7ebbe87101a9c8edb6e8b6d21"
     },
+<<<<<<< HEAD
     "devtools": {
       "Package": "devtools",
       "Version": "2.4.5",
@@ -633,6 +652,8 @@
       ],
       "Hash": "ea5bc8b4a6a01e4f12d98b58329930bb"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "diffobj": {
       "Package": "diffobj",
       "Version": "0.3.5",
@@ -659,6 +680,7 @@
       ],
       "Hash": "8b708f296afd9ae69f450f9640be8990"
     },
+<<<<<<< HEAD
     "downlit": {
       "Package": "downlit",
       "Version": "0.4.2",
@@ -679,6 +701,8 @@
       ],
       "Hash": "79bf3f66590752ffbba20f8d2da94c7c"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "dplyr": {
       "Package": "dplyr",
       "Version": "1.1.1",
@@ -702,6 +726,7 @@
       ],
       "Hash": "eb5742d256a0d9306d85ea68756d8187"
     },
+<<<<<<< HEAD
     "dtplyr": {
       "Package": "dtplyr",
       "Version": "1.3.1",
@@ -721,6 +746,8 @@
       ],
       "Hash": "54ed3ea01b11e81a86544faaecfef8e2"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "ellipse": {
       "Package": "ellipse",
       "Version": "0.4.4",
@@ -851,6 +878,7 @@
       ],
       "Hash": "e80750aec5717dedc019ad7ee40e4a7c"
     },
+<<<<<<< HEAD
     "forcats": {
       "Package": "forcats",
       "Version": "1.0.0",
@@ -867,6 +895,8 @@
       ],
       "Hash": "1a0a9a3d5083d0d573c4214576f1e690"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "fs": {
       "Package": "fs",
       "Version": "1.6.1",
@@ -878,6 +908,7 @@
       ],
       "Hash": "f4dcd23b67e33d851d2079f703e8b985"
     },
+<<<<<<< HEAD
     "gargle": {
       "Package": "gargle",
       "Version": "1.3.0",
@@ -901,6 +932,8 @@
       ],
       "Hash": "bb3208dcdfeb2e68bf33c87601b3cbe3"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "generics": {
       "Package": "generics",
       "Version": "0.1.3",
@@ -912,6 +945,7 @@
       ],
       "Hash": "15e9634c0fcd294799e9b2e929ed1b86"
     },
+<<<<<<< HEAD
     "gert": {
       "Package": "gert",
       "Version": "1.9.2",
@@ -927,6 +961,8 @@
       ],
       "Hash": "9122b3958e749badb5c939f498038b57"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.4.1",
@@ -1020,6 +1056,7 @@
       ],
       "Hash": "a57f0f5dbcfd0d77ad4ff33032f5dc79"
     },
+<<<<<<< HEAD
     "gh": {
       "Package": "gh",
       "Version": "1.4.0",
@@ -1046,6 +1083,8 @@
       ],
       "Hash": "ab08ac61f3e1be454ae21911eb8bc2fe"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "glue": {
       "Package": "glue",
       "Version": "1.6.2",
@@ -1057,6 +1096,7 @@
       ],
       "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e"
     },
+<<<<<<< HEAD
     "googledrive": {
       "Package": "googledrive",
       "Version": "2.1.0",
@@ -1110,6 +1150,8 @@
       ],
       "Hash": "fd7b97bd862a14297b0bb7ed28a3dada"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "gridExtra": {
       "Package": "gridExtra",
       "Version": "2.3",
@@ -1139,6 +1181,7 @@
       ],
       "Hash": "b44addadb528a0d227794121c00572a0"
     },
+<<<<<<< HEAD
     "haven": {
       "Package": "haven",
       "Version": "2.5.2",
@@ -1160,6 +1203,8 @@
       ],
       "Hash": "8b331e659e67d757db0fcc28e689c501"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "highr": {
       "Package": "highr",
       "Version": "0.10",
@@ -1217,6 +1262,7 @@
       ],
       "Hash": "a865aa85bcb2697f47505bfd70422471"
     },
+<<<<<<< HEAD
     "httpuv": {
       "Package": "httpuv",
       "Version": "1.6.9",
@@ -1232,6 +1278,8 @@
       ],
       "Hash": "1046aa31a57eae8b357267a56a0b6d8b"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "httr": {
       "Package": "httr",
       "Version": "1.4.5",
@@ -1247,6 +1295,7 @@
       ],
       "Hash": "f6844033201269bec3ca0097bc6c97b3"
     },
+<<<<<<< HEAD
     "httr2": {
       "Package": "httr2",
       "Version": "0.2.2",
@@ -1284,6 +1333,8 @@
       "Repository": "CRAN",
       "Hash": "6154ec2223172bce8162d4153cda21f7"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "isoband": {
       "Package": "isoband",
       "Version": "0.2.7",
@@ -1424,6 +1475,7 @@
       ],
       "Hash": "d4cc4256e96d6d1e6798d316ffa0b761"
     },
+<<<<<<< HEAD
     "lubridate": {
       "Package": "lubridate",
       "Version": "1.9.2",
@@ -1437,6 +1489,8 @@
       ],
       "Hash": "e25f18436e3efd42c7c590a1c4c15390"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "magrittr": {
       "Package": "magrittr",
       "Version": "2.0.3",
@@ -1485,6 +1539,7 @@
       ],
       "Hash": "18e9c28c1d3ca1560ce30658b22ce104"
     },
+<<<<<<< HEAD
     "miniUI": {
       "Package": "miniUI",
       "Version": "0.1.1.1",
@@ -1497,6 +1552,8 @@
       ],
       "Hash": "fec5f52652d60615fdb3957b3d74324a"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "minqa": {
       "Package": "minqa",
       "Version": "1.2.5",
@@ -1507,6 +1564,7 @@
       ],
       "Hash": "587ce77fd3c7bada7eadb2d18b62930d"
     },
+<<<<<<< HEAD
     "modelr": {
       "Package": "modelr",
       "Version": "0.1.11",
@@ -1525,6 +1583,8 @@
       ],
       "Hash": "4f50122dc256b1b6996a4703fecea821"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "multcompView": {
       "Package": "multcompView",
       "Version": "0.1-8",
@@ -1666,6 +1726,7 @@
       ],
       "Hash": "15da5a8412f317beeee6175fbc76f4bb"
     },
+<<<<<<< HEAD
     "pkgbuild": {
       "Package": "pkgbuild",
       "Version": "1.4.0",
@@ -1685,6 +1746,8 @@
       ],
       "Hash": "d6c3008d79653a0f267703288230105e"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "pkgconfig": {
       "Package": "pkgconfig",
       "Version": "2.0.3",
@@ -1695,6 +1758,7 @@
       ],
       "Hash": "01f28d4278f15c76cddbea05899c5d6f"
     },
+<<<<<<< HEAD
     "pkgdown": {
       "Package": "pkgdown",
       "Version": "2.0.7",
@@ -1725,6 +1789,8 @@
       ],
       "Hash": "16fa15449c930bf3a7761d3c68f8abf9"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "pkgload": {
       "Package": "pkgload",
       "Version": "1.3.2",
@@ -1794,6 +1860,7 @@
       ],
       "Hash": "a33ee2d9bf07564efb888ad98410da84"
     },
+<<<<<<< HEAD
     "profvis": {
       "Package": "profvis",
       "Version": "0.3.7",
@@ -1806,6 +1873,8 @@
       ],
       "Hash": "e9d21e79848e02e524bea6f5bd53e7e4"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "progress": {
       "Package": "progress",
       "Version": "1.2.2",
@@ -1899,6 +1968,7 @@
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
+<<<<<<< HEAD
     "rcmdcheck": {
       "Package": "rcmdcheck",
       "Version": "1.4.0",
@@ -1921,6 +1991,8 @@
       ],
       "Hash": "8f25ebe2ec38b1f2aef3b0d2ef76f6c4"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "readr": {
       "Package": "readr",
       "Version": "2.1.4",
@@ -1976,6 +2048,7 @@
       ],
       "Hash": "76c9e04c712a05848ae7a23d2f170a40"
     },
+<<<<<<< HEAD
     "remotes": {
       "Package": "remotes",
       "Version": "2.4.2",
@@ -1990,6 +2063,8 @@
       ],
       "Hash": "227045be9aee47e6dda9bb38ac870d67"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "renv": {
       "Package": "renv",
       "Version": "0.17.2",
@@ -2000,6 +2075,7 @@
       ],
       "Hash": "aaf3c7f769695266a2113db67a25148b"
     },
+<<<<<<< HEAD
     "reprex": {
       "Package": "reprex",
       "Version": "2.0.2",
@@ -2022,6 +2098,8 @@
       ],
       "Hash": "d66fe009d4c20b7ab1927eb405db9ee2"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "reshape2": {
       "Package": "reshape2",
       "Version": "1.4.4",
@@ -2070,6 +2148,7 @@
       ],
       "Hash": "493df4ae51e2e984952ea4d5c75786a3"
     },
+<<<<<<< HEAD
     "roxygen2": {
       "Package": "roxygen2",
       "Version": "7.2.3",
@@ -2096,6 +2175,8 @@
       ],
       "Hash": "7b153c746193b143c14baa072bae4e27"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "rprojroot": {
       "Package": "rprojroot",
       "Version": "2.0.3",
@@ -2129,6 +2210,7 @@
       ],
       "Hash": "5045fbb71b143878d8c51975d1d7d56d"
     },
+<<<<<<< HEAD
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.14",
@@ -2168,6 +2250,8 @@
       ],
       "Hash": "a4a5ac819a467808c60e36e92ddf195e"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "sass": {
       "Package": "sass",
       "Version": "0.4.5",
@@ -2213,6 +2297,7 @@
       ],
       "Hash": "4a5715fedeeb7e01ced6b238a03811c4"
     },
+<<<<<<< HEAD
     "selectr": {
       "Package": "selectr",
       "Version": "0.4-2",
@@ -2283,6 +2368,8 @@
       ],
       "Hash": "5f5a7629f956619d519205ec475fe647"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.12",
@@ -2447,6 +2534,7 @@
       ],
       "Hash": "79540e5fcd9e0435af547d885f184fd5"
     },
+<<<<<<< HEAD
     "tidyverse": {
       "Package": "tidyverse",
       "Version": "2.0.0",
@@ -2498,6 +2586,8 @@
       ],
       "Hash": "8548b44f79a35ba1791308b61e6012d7"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.44",
@@ -2519,6 +2609,7 @@
       ],
       "Hash": "b2e1cbce7c903eaf23ec05c58e59fb5e"
     },
+<<<<<<< HEAD
     "urlchecker": {
       "Package": "urlchecker",
       "Version": "1.0.1",
@@ -2564,6 +2655,8 @@
       ],
       "Hash": "a67a22c201832b12c036cc059f1d137d"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "utf8": {
       "Package": "utf8",
       "Version": "1.2.3",
@@ -2574,6 +2667,7 @@
       ],
       "Hash": "1fe17157424bb09c48a8b3b550c753bc"
     },
+<<<<<<< HEAD
     "uuid": {
       "Package": "uuid",
       "Version": "1.1-0",
@@ -2584,6 +2678,8 @@
       ],
       "Hash": "f1cb46c157d080b729159d407be83496"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "vctrs": {
       "Package": "vctrs",
       "Version": "0.6.1",
@@ -2665,6 +2761,7 @@
       ],
       "Hash": "035fba89d0c86e2113120f93301b98ad"
     },
+<<<<<<< HEAD
     "whisker": {
       "Package": "whisker",
       "Version": "0.4.1",
@@ -2672,6 +2769,8 @@
       "Repository": "CRAN",
       "Hash": "c6abfa47a46d281a7d5159d0a8891e88"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "withr": {
       "Package": "withr",
       "Version": "2.5.0",
@@ -2707,6 +2806,7 @@
       ],
       "Hash": "40682ed6a969ea5abfd351eb67833adc"
     },
+<<<<<<< HEAD
     "xopen": {
       "Package": "xopen",
       "Version": "1.0.0",
@@ -2730,12 +2830,15 @@
       ],
       "Hash": "b8acdf8af494d9ec19ccb2481a9b11c2"
     },
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     "yaml": {
       "Package": "yaml",
       "Version": "2.3.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "0d0056cc5383fbc240ccd0cb584bf436"
+<<<<<<< HEAD
     },
     "zip": {
       "Package": "zip",
@@ -2743,6 +2846,8 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "c42bfcec3fa6a0cce17ce1f8bc684f88"
+=======
+>>>>>>> 775f0cfe8d6d2f024c93cd5ba021993c2e20ff5c
     }
   }
 }

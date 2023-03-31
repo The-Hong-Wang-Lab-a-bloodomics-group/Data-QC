@@ -3,30 +3,22 @@
 
 library(readr)
 library(readxl)
+library(tidyverse)
+library(dplyr)
 # data clean requirement:
 # 1.Add the group column for each sample.
 # 2.The column names of data are the samples.
 # 3.The row names of data are the symbols, sampleid and group.
 # data iris
 data("iris")
-data <- iris
-data$sampleid <- rownames(data)
-data$group <- data$Species
-data <- data %>% 
-  select(-c("Species"))
-head(data)
-# the data needs to be transformed into the following styles.
-#   Sepal.Length Sepal.Width Petal.Length Petal.Width  group sampleid
-# 1          5.1         3.5          1.4         0.2 setosa        1
-# 2          4.9         3.0          1.4         0.2 setosa        2
-# 3          4.7         3.2          1.3         0.2 setosa        3
-# 4          4.6         3.1          1.5         0.2 setosa        4
-# 5          5.0         3.6          1.4         0.2 setosa        5
-# 6          5.4         3.9          1.7         0.4 setosa        6
+data <- iris %>%
+  rename(group = "Species") %>%
+  mutate(sampleid = rownames(iris))
 
+head(data)
 # 1.2 color setting -------------------------------------------------------
 # The names(value_colour) need to be the same as table(data$group)
-# If you have more than two groups, 
+# If you have more than two groups,
 # you can change the "group name" to your group name.
 value_colour <- c("setosa" = "#00A087FF",# control group
                   "versicolor" = "#E64B35FF",# Experimental group
@@ -43,18 +35,21 @@ data_ggplot <- tidyr::gather(data,key = "key",
                              value = "value",
                              -c("sampleid","group")
                              )
-data_ggplot$group <- factor(data_ggplot$group)
-data_ggplot <- data_ggplot[order(data_ggplot$group),]
-data_ggplot$sampleid <- factor(data_ggplot$sampleid,levels = unique(data_ggplot$sampleid))
-data_ggplot <- data_ggplot[order(data_ggplot$sampleid),]
+# arrange
+data_ggplot <- data_ggplot %>%
+  mutate(group = factor(.$group)) %>%
+  arrange(group) %>%
+  mutate(sampleid = factor(.$sampleid,
+                           levels = unique(.$sampleid))) %>%
+  arrange(sampleid)
 # Plot the boxplot with ggplot2.
 ggplot(data_ggplot,aes(x = sampleid,
                        y = log2(value + 1),
                        fill = group)
-       ) + 
-  geom_boxplot() + 
-  scale_fill_manual(values = value_colour) + 
-  theme_classic() + 
+       ) +
+  geom_boxplot() +
+  scale_fill_manual(values = value_colour) +
+  theme_classic() +
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 1,
                                    colour = "black",
@@ -62,7 +57,7 @@ ggplot(data_ggplot,aes(x = sampleid,
         axis.text.y = element_text(hjust = 1,
                                    colour = "black",
                                    size = 10)
-  ) + 
+  ) +
   labs(x = "")
 ggsave(filename = "QC_boxplot.pdf",
        height = 5,
@@ -74,24 +69,23 @@ ggsave(filename = "QC_boxplot.png",
        plot = last_plot())
 
 ## 2.2 heatmap ------------------------------------------------------------
-data_heatmap <- subset(data,
-                       select = -c(group,sampleid)
-)
-data_heatmap <- as.data.frame(t(data_heatmap)
-)
-data_heatmap <- log2(data_heatmap + 1)
+data_heatmap <- data %>%
+  subset(.,select = (-c(group,sampleid))) %>%
+  t() %>%
+  as.data.frame() %>%
+  {log2((. + 1))}
+
 library(pheatmap)
 # annotation_col requirements:
 # 1.the annotation_col must be a data frame
 # 2.the row names of annotation_col == the column names of data_heatmap
 # 3.the column names of annotation_col is the annotation legend name
-# 
+#
 # annotation_colors requirements:
 # 1.the annotation_colors must be a list.
 # 2.if the group is more than two, you can add by format.
-annotation_heatmap <- subset(data,
-                             select = c(group)
-                             )
+annotation_heatmap <- data %>%
+  select(group)
 annotation_colors <- list(group = value_colour)
 dev.off()
 pdf(file = "QC_heatmap.pdf",
@@ -115,14 +109,19 @@ pheatmap(data_heatmap,
          annotation_colors = annotation_colors)
 dev.off()
 ## 2.3 PCA ----------------------------------------------------------------
-group_list <- data$group
+
 library(FactoMineR)
-library(factoextra) 
+library(factoextra)
 
-data_pca <- subset(data,select = -c(group,sampleid))
-
-dat.pca <- PCA(data_pca, 
-               graph = FALSE)
+# data_pca <- data_pca %>%
+#   subset(.,select = -c(group,sampleid))
+# dat.pca <- PCA(data_pca,
+#                graph = FALSE)
+dat.pca <- data %>%
+  subset(.,select = -c(group,sampleid)) %>%
+  PCA(.,
+      graph = FALSE)
+group_list <- data$group
 dev.off()
 pdf(file = "QC_PCA.pdf",
     height = 5,

@@ -8,6 +8,8 @@
 #' @export
 #'
 #' @examples
+#' library(QC)
+#' QC_boxplot(data,data_group,value_colour)
 QC_boxplot <- function(data,data_group,value_colour){
   library(ggplot2)
   library(tidyr)
@@ -46,3 +48,7 @@ QC_boxplot <- function(data,data_group,value_colour){
           ) +
     labs(x = "")
 }
+
+
+devtools::document()
+

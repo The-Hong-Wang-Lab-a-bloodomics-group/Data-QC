@@ -1,0 +1,26 @@
+{
+    "id": "85275B4D",
+    "path": "E:/code/QC/R/QC_boxplot.R",
+    "project_path": "R/QC_boxplot.R",
+    "type": "r_source",
+    "hash": "981621895",
+    "contents": "",
+    "dirty": false,
+    "created": 1680058479618.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "12,16",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680252646,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680252646869,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,360 @@
+# 1 data input ----
+## 1.1 data input ----
+library(limma)
+
+library(readr)
+library(readxl)
+data_group <- read_excel("02_rawdata/added sample info20230129.xlsx")
+data_group <- as.data.frame(data_group)
+
+data_swab <- read_excel("02_rawdata/swab_proteins_imarker_with_sampleID.xlsx")
+data_plasma <- read_excel("02_rawdata/plasma_proteins_imarker_with_sampleID.xlsx")
+data_platelet <- read_excel("02_rawdata/platelet_proteins_imarker_with_sampleID.xlsx")
+View(data_swab)
+## swab
+data_swab <- as.data.frame(data_swab)
+data_GN <- subset(data_swab,select = c(Accession,`Gene Symbol`))
+colnames(data_GN)[1] <- "Row.names"
+rownames(data_swab) <- data_swab$Accession
+data_swab <- subset(data_swab,select = -c(`Protein FDR Confidence: Combined`,
+                                          `Description`,
+                                          `Ensembl Gene ID`,
+                                          `Gene ID`,
+                                          WikiPathways,
+                                          `Reactome Pathways`))
+## plasma
+data_plasma <- as.data.frame(data_plasma)
+data_GN <- subset(data_plasma,select = c(Accession,`Gene Symbol`))
+colnames(data_GN)[1] <- "Row.names"
+rownames(data_plasma) <- data_plasma$Accession
+data_plasma <- subset(data_plasma,select = -c(`Protein FDR Confidence: Combined`,
+                                              `Description`,
+                                              `Ensembl Gene ID`,
+                                              `Gene ID`,
+                                              WikiPathways,
+                                              `Reactome Pathways`))
+## platelet
+data_platelet <- as.data.frame(data_platelet)
+data_GN <- subset(data_platelet,select = c(Accession,`Gene Symbol`))
+colnames(data_GN)[1] <- "Row.names"
+rownames(data_platelet) <- data_platelet$Accession
+data_platelet <- subset(data_platelet,select = -c(`Protein FDR Confidence: Combined`,
+                                                  `Description`,
+                                                  `Ensembl Gene ID`,
+                                                  `Gene ID`,
+                                                  WikiPathways,
+                                                  `Reactome Pathways`))
+
+
+## 1.2 group input----
+## swab
+data_group_swab <- data.frame(sampleid = data_group$`Patient ID`,
+                              group = data_group$group_swab)
+data_group_swab <- na.omit(data_group_swab)
+rownames(data_group_swab) <- data_group_swab$sampleid
+## plasma
+data_group_plasma <- data.frame(sampleid = data_group$`Patient ID`,
+                              group = data_group$group_plasma)
+data_group_plasma <- na.omit(data_group_plasma)
+rownames(data_group_plasma) <- data_group_plasma$sampleid
+## 
+data_group_platelet <- data.frame(sampleid = data_group$`Patient ID`,
+                                group = data_group$group_platelet)
+data_group_platelet <- na.omit(data_group_platelet)
+rownames(data_group_platelet) <- data_group_platelet$sampleid
+
+# data select -------------------------------------------------------------
+
+rownames(data_swab) <- data_swab$Accession
+DESeq2_data <- subset(data_swab,
+                      select = data_group_swab$sampleid)
+
+# DESeq2 ------------------------------------------------------------------
+ 
+vs_ <- factor(data_group_swab$group,
+              levels = c("OXG","HD"))
+
+design = model.matrix(~0 + vs_)
+rownames(design) <- data_group_swab$sampleid
+DESeq2_design <- design
+
+
+library(limma)#加载包
+DESeq2_data <- log2(DESeq2_data + 1)
+all(rownames(DESeq2_design) == colnames(DESeq2_data))#确保表达矩阵的列名与分组矩阵行名相一致
+
+fit <- lmFit(DESeq2_data,design = DESeq2_design)
+
+#generate contrast matrix
+  contrast.matrix <- makeContrasts(vs_OXG - vs_HD,levels = DESeq2_design)
+
+#linear model fit with constrast design
+fit2 <- contrasts.fit(fit, contrast.matrix)
+
+#empirical Bayes adjust
+fit2 <- eBayes(fit2)
+
+###show summary results
+options(digits = 3)
+results <- decideTests(fit2,
+                       method = "global")
+summary(results)
+
+#show topTable of one specific comparision
+
+dif_DESeq2_all <- topTable(fit2, 
+                           number = nrow(fit2), 
+                           coef = "vs_OXG - vs_HD", 
+                           sort.by = "P")
+dif_DESeq2_all$Row.names <- rownames(dif_DESeq2_all)
+dif_DESeq2_all <- merge(data_GN,dif_DESeq2_all,by = "Row.names")
+dif_DESeq2_all <- dif_DESeq2_all[order(dif_DESeq2_all$P.Value),]
+dif_DESeq2_all <- na.omit(dif_DESeq2_all)
+dif_DESeq2_all <- dplyr::distinct(dif_DESeq2_all,`Gene Symbol`,.keep_all = T)
+rownames(dif_DESeq2_all) <- dif_DESeq2_all$`Gene Symbol`
+dif_DESeq2 <- subset(dif_DESeq2_all,dif_DESeq2_all$P.Value < 0.05)
+
+### Merge combined pairwise file with original data
+
+write.csv(dif_DESeq2,
+          file = "result/02_DEseq/dif_platelet.csv",quote = F)
+write.csv(dif_DESeq2_all,
+          file = "result/02_DEseq/dif_all_platelet.csv",quote = F)
+## heatmap ----
+### colour settings ----
+value_colour <- c("HD" = "#00A087FF",
+                  "OXG" = "#E64B35FF")
+dif_DESeq2 <- dif_DESeq2[order(dif_DESeq2$logFC),]
+heat <- subset(as.data.frame(t(DESeq2_data)), 
+               select = dif_DESeq2$Row.names)
+heat <- as.data.frame(t(heat))
+heat <- heat[c(1:10,(nrow(heat) - 9):nrow(heat)),]
+heat$Row.names <- rownames(heat)
+heat <- merge(data_GN,heat,by = "Row.names")
+rownames(heat) <- heat$`Gene Symbol`
+heat <- subset(heat,select = -c(`Row.names`,
+                                `Gene Symbol`))
+
+annotation_col <- data_group_swab
+annotation_col <- subset(annotation_col,select = -c(sampleid))
+library(pheatmap)
+x <- t(scale(t(heat)))  #数据均一化
+
+pheatmap(x,
+         show_colnames = T,
+         show_rownames = T,
+         cluster_rows = T,
+         cluster_col = F,
+         annotation_colors = list(group = value_colour),
+         annotation_col = annotation_col)
+pdf(file = "result/02_DEseq/heatmap_swab.pdf",
+    width = 5,
+    height = 5)
+pheatmap(x,show_colnames = T,
+         show_rownames = T,
+         cluster_rows = T,
+         cluster_col = F,
+         annotation_colors = list(group = value_colour),
+         annotation_col = annotation_col)
+dev.off()
+png(filename = "result/02_DEseq/heatmap_swab.png",
+    width = 2000,
+    height = 2000,
+    res = 300)
+pheatmap(x,show_colnames = T,
+         show_rownames = T,
+         cluster_rows = T,
+         cluster_col = F,
+         annotation_colors = list(group = value_colour),
+         annotation_col = annotation_col)
+dev.off()
+# pheatmap(rt,show_colnames=T,cluster_rows =F,cluster_col=F)
+# pheatmap(x,scale = "row", clustering_method = "average",show_colnames=F,ColSideColors)
+# pheatmap(x, scale = "row", clustering_distance_rows = "correlation",show_colnames=F)
+# 
+# color.map <- function(logFC){if(logFC>0)"#FF0000" else "#0000FF"}
+# patientcolors <- unlist(lapply(rt$log2FoldChange,color.map))
+# heatmap(x,scale = "row", clustering_method = "average",show_colnames=F)
+# 
+# 
+# pheatmap(x,show_colnames=F)
+
+
+####-标记火山图-####
+res_data <- read.csv(file = "result/02_DEseq/dif_all_swab.csv")
+library(ggplot2)
+
+library(ggrepel)
+
+library(dplyr)
+res_data <- dif_DESeq2_all
+
+pvalue <- "P.Value"
+lfc <- "logFC"
+
+data <- res_data[res_data[,pvalue] <= 1,]
+
+data$gene <- rownames(data)
+
+data$sig[data[,pvalue] >= 0.05 | abs(data[,lfc]) < 0] <- "Not"
+
+data$sig[data[,pvalue] < 0.05 & data[,lfc] >= 0] <- "Up"
+
+data$sig[data[,pvalue] < 0.05 & data[,lfc] <= -0] <- "Down"
+input <- data
+
+Gene <- as.data.frame(heat)
+Gene$`Gene Symbol` <- rownames(Gene)
+ggplot(data = data, aes(x = logFC, y = -log10(P.Value),color = sig)) +
+  geom_point(alpha = 0.9) +
+  theme_set(theme_bw()) +
+  theme(panel.grid = element_blank(),strip.text = element_blank()) +
+  scale_color_manual(values = c("#00A087","grey80","#E64B35")) +
+  #scale_color_npg()+
+  geom_hline(yintercept = -log10(0.05),
+             lty = 4,
+             lwd = 0.6,
+             alpha = 0.8) +
+  geom_vline(xintercept = c(-0.5,0.5),
+             lty = 4,
+             lwd = 0.6,
+             alpha = 0.8) +
+  labs(title = "") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+volc <-  ggplot(input, aes(logFC, -log10(P.Value))) +
+  geom_point(aes(col = sig)) + 
+  scale_color_manual(values = c("#00A087","grey80", "#E64B35"),
+                     labels = c("Down", 'Not','Up')) +
+  ggtitle("Volcano") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_point(data = input[input$`Gene Symbol` %in% rownames(Gene),],
+             aes(logFC, -log10(P.Value)),
+             colour = "#3C5488FF",
+             size = 2) +
+  geom_hline(yintercept = -log10(0.05),
+             lty = 4,
+             lwd = 0.6,
+             alpha = 0.8) +
+  # geom_vline(xintercept = c(0.5,-0.5),lty=4,lwd=0.6,alpha=0.8)+
+  labs(title = "platelet") +
+  
+
+volc + 
+  geom_text_repel(data = input[input$`Gene Symbol` %in% rownames(Gene),], 
+                  aes(label = `Gene Symbol`))
+ggsave(filename = "result/02_DEseq/volc_platelet.pdf",
+       height = 5,
+       width = 5,
+       plot = last_plot())
+ggsave(filename = "result/02_DEseq/volc_platelet.png",
+       height = 5,
+       width = 5,
+       plot = last_plot())
+
+
+# overlap -----------------------------------------------------------------
+
+library(readr)
+result_plasma <- read.csv(file = "result/02_DEseq/dif_plasma.csv")
+result_platelet <- read.csv(file = "result/02_DEseq/dif_platelet.csv")
+result_swab <- read.csv(file = "result/02_DEseq/dif_swab.csv")
+result_plasma_up <- subset(result_plasma,
+                           result_plasma$logFC > 0)
+result_plasma_down <- subset(result_plasma,
+                           result_plasma$logFC < 0)
+result_platelet_up <- subset(result_platelet,
+                           result_platelet$logFC > 0)
+result_platelet_down <- subset(result_platelet,
+                             result_platelet$logFC < 0)
+result_swab_up <- subset(result_swab,
+                           result_swab$logFC > 0)
+result_swab_down <- subset(result_swab,
+                             result_swab$logFC < 0)
+
+
+data_VN <- list(`plasma up` = result_plasma_up$Gene.Symbol,
+                `platelet up` = result_platelet_up$Gene.Symbol,
+                `swab up` = result_swab_up$Gene.Symbol)
+
+data_VN <- list(`plasma down` = result_plasma_down$Gene.Symbol,
+                `platelet down` = result_platelet_down$Gene.Symbol,
+                `swab down` = result_swab_down$Gene.Symbol)
+data_VN <- list(`swab` = rownames(data_swab),
+                `plasma` = rownames(data_plasma),
+                `platelet` = rownames(data_platelet))
+
+library(ggsci)
+mypal <- pal_npg("nrc", alpha = 1)(9)
+library(VennDiagram)
+
+# venn.diagram(data_VN,
+#              fill = mypal[1:2],
+#              #height = 2000,width = 4000,
+#              resolution = 300,
+#              imagetype = "png",
+#              cat.fontface = "bold",
+#              fontfamily = "Arial",
+#              cat.cex = 2,
+#              main = "DESeq of differential data",
+#              main.cex = 2,
+#              main.fontface = "bold",
+#              main.fontfamily = "Arial",
+#              cex = 2,
+#              filename = paste0("result/",dir,"/DESeq/VennDiagram2.png"))
+venn.diagram(data_VN,
+             fill = mypal[1:3],
+             #height = 2000,width = 4000,
+             resolution = 300, 
+             imagetype = "png", 
+             cat.fontface = "bold", 
+             fontfamily = "Arial", 
+             cat.cex = 2,
+             main = "DESeq of differential data",
+             main.cex = 2, 
+             main.fontface = "bold", 
+             main.fontfamily = "Arial", 
+             cex = 2,
+             filename = paste0("result/VennDiagram2.png"))
+
+result_intersect <- intersect(result_M_G_GF$Row.names,result_OCI_G_GF$Row.names)
+
+result_before <- result_M_G_GF$Row.names
+
+result_before <- setdiff(result_M_G_GF$Row.names,result_intersect)
+
+result_after <- result_OCI_G_GF$Row.names
+
+result_after <- setdiff(result_after,result_intersect)
+
+
+write.csv(result_before,
+          file = "result/result_M_G_GF.csv")
+write.csv(result_intersect,file = "result/result_intersect.csv")
+write.csv(result_after,file = "result/result_OCI_G_GF.csv")
+
+
+# overlap -----------------------------------------------------------------
+## data input ----
+library(WGCNA)
+
+
+rownames(result_M) <- result_M$X
+rownames(result_OCI) <- result_OCI$X
+
+result_intersect <- intersect(result_M$X,result_OCI$X)
+
+result_before <- result_M$X
+
+result_before <- setdiff(result_M$X,result_intersect)
+
+result_after <- result_OCI$X
+
+result_after <- setdiff(result_after,result_intersect)
+
+result_all <- c(result_intersect,result_before,result_after)
+
+write.csv(result_all,file = "result/anova-wgcna/list_all.csv")
+
+
+

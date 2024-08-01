@@ -1,0 +1,26 @@
+{
+    "id": "3161000A",
+    "path": "E:/code/QC/R/QC_heatmap.R",
+    "project_path": "R/QC_heatmap.R",
+    "type": "r_source",
+    "hash": "328015765",
+    "contents": "",
+    "dirty": false,
+    "created": 1680099407295.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "11,16",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680252654,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680252654902,
+    "read_only": false,
+    "read_only_alternatives": []
+}
